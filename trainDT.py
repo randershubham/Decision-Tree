@@ -212,10 +212,10 @@ if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
 
-    train_data_file = str(args.train_data)
-    train_label_file = str(args.train_label)
-    test_data_file = str(args.test_data)
-    test_label_file = str(args.test_label)
+    train_data_file = os.path.abspath(str(args.train_data))
+    train_label_file = os.path.abspath(str(args.train_label))
+    test_data_file = os.path.abspath(str(args.test_data))
+    test_label_file = os.path.abspath(str(args.test_label))
     max_level_input = int(args.nlevels)
     p_threshold = float(args.pthrd)
     impurity = str(args.impurity)
@@ -233,7 +233,6 @@ if __name__ == '__main__':
     print(Node.calculateGINI(range(0, 400)))
 
     decision_tree.classify(test_x, _output_file=pred_output_file)
-    print(pred_output_file)
     prediction_file = open(pred_output_file, "r")
     predictions = np.genfromtxt(prediction_file)
 
