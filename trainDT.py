@@ -161,7 +161,7 @@ class Node:
             raise ("Invalid impurity method provided: " + str(self.impurity_method))
 
     def classify(self, _test_x, _output_file):
-        _file = open(_output_file, "w")
+        _file = open(_output_file, mode="w", encoding="utf-8")
         for record in _test_x:
             _predicted_label = self.get_predicted_label(record)
             _file.write(str(_predicted_label))
