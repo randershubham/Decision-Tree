@@ -1,5 +1,6 @@
 import argparse
 import numpy as np
+import os
 
 
 class Node:
@@ -218,7 +219,7 @@ if __name__ == '__main__':
     max_level_input = int(args.nlevels)
     p_threshold = float(args.pthrd)
     impurity = str(args.impurity)
-    pred_output_file = str(args.pred_file)
+    pred_output_file = os.path.abspath(str(args.pred_file))
 
     train_x, train_y = load_data_file_and_label(train_data_file, train_label_file)
     test_x, test_y = load_data_file_and_label(test_data_file, test_label_file)
