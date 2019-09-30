@@ -232,6 +232,7 @@ if __name__ == '__main__':
     print(Node.calculateGINI(range(0, 400)))
 
     decision_tree.classify(test_x, _output_file=pred_output_file)
+    print(pred_output_file)
     prediction_file = open(pred_output_file, "r")
     predictions = np.genfromtxt(prediction_file)
 
