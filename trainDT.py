@@ -234,6 +234,6 @@ if __name__ == '__main__':
 
     decision_tree.classify(test_x, _output_file=pred_output_file)
     prediction_file = open(pred_output_file, "r")
-    predictions = np.genfromtxt(prediction_file)
+    predictions = np.genfromtxt(prediction_file, dtype=int)
 
     print(get_accuracy(test_y, predictions))
