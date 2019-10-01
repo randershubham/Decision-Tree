@@ -24,10 +24,10 @@ class Node:
         self.nfeatures = nfeatures
 
         # default value below
-        self.dfeature = -1          # the feature based on which decision will be made
-        self.majority_class = -1    # the majority class label at the given node
-        self.left_child = None      # reference to the left_child
-        self.right_child = None     # reference to the right_child
+        self.dfeature = -1  # the feature based on which decision will be made
+        self.majority_class = -1  # the majority class label at the given node
+        self.left_child = None  # reference to the left_child
+        self.right_child = None  # reference to the right_child
 
     # static method to initialize the node, takes the same parameters as required to create a Node
     @staticmethod
@@ -304,6 +304,43 @@ def get_accuracy(expected, predicted):
     return count / len(expected)
 
 
+def get_precision_recall(expected, predicted):
+    unique_label_set = np.asarray(list(set(train_y)))
+    precision_recall = []
+    for i in np.arange(0, unique_label_set.size):
+        true_positive = 0
+        false_positive = 0
+        true_negative = 0
+        false_negative = 0
+        for j in np.arange(0, expected.size):
+            # positive true condition
+            if expected[j] == unique_label_set[i]:
+                # true positive condition
+                if unique_label_set[i] == predicted[j]:
+                    true_positive += 1
+                else:
+                    false_negative += 1
+            # negative true condition
+            else:
+                # false positive condition
+                if unique_label_set[i] == predicted[j]:
+                    false_positive += 1
+                else:
+                    true_negative += 1
+
+        print(true_negative)
+        print(true_positive)
+        print(false_positive)
+        print(false_negative)
+        print("-------")
+
+        precision = true_positive / (true_positive + false_positive)
+        recall = true_positive / (true_positive + false_negative)
+        precision_recall.append([unique_label_set[i], precision, recall])
+
+    return np.asarray(precision_recall)
+
+
 # main method where the program starts
 if __name__ == '__main__':
     parser = get_parser()
@@ -336,3 +373,4 @@ if __name__ == '__main__':
     # get the predictions from the output file to calculate the accuracy
     predictions = np.genfromtxt(pred_output_file).astype(int)
     print(get_accuracy(test_y, predictions))
+    print(get_precision_recall(test_y, predictions))
