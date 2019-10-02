@@ -303,42 +303,62 @@ def get_accuracy(expected, predicted):
             count = count + 1
     return count / len(expected)
 
+# def get_precision_recall(expected, predicted):
+#     unique_label_set = np.asarray(list(set(train_y)))
+#     precision_recall = []
+#     for i in np.arange(0, unique_label_set.size):
+#         true_positive = 0
+#         false_positive = 0
+#         true_negative = 0
+#         false_negative = 0
+#         for j in np.arange(0, expected.size):
+#             # positive true condition
+#             if expected[j] == unique_label_set[i]:
+#                 # true positive condition
+#                 if unique_label_set[i] == predicted[j]:
+#                     true_positive += 1
+#                 else:
+#                     false_negative += 1
+#             # negative true condition
+#             else:
+#                 # false positive condition
+#                 if unique_label_set[i] == predicted[j]:
+#                     false_positive += 1
+#                 else:
+#                     true_negative += 1
+#
+#         precision = true_positive / (true_positive + false_positive)
+#         recall = true_positive / (true_positive + false_negative)
+#         precision_recall.append([unique_label_set[i], precision, recall])
+#
+#     return np.asarray(precision_recall)
+
 
 def get_precision_recall(expected, predicted):
-    unique_label_set = np.asarray(list(set(train_y)))
-    precision_recall = []
-    for i in np.arange(0, unique_label_set.size):
-        true_positive = 0
-        false_positive = 0
-        true_negative = 0
-        false_negative = 0
-        for j in np.arange(0, expected.size):
-            # positive true condition
-            if expected[j] == unique_label_set[i]:
-                # true positive condition
-                if unique_label_set[i] == predicted[j]:
-                    true_positive += 1
-                else:
-                    false_negative += 1
-            # negative true condition
+    true_positive = 0
+    false_positive = 0
+    true_negative = 0
+    false_negative = 0
+    for j in np.arange(0, expected.size):
+        # positive true condition
+        if expected[j] == 1:
+            # true positive condition
+            if 1 == predicted[j]:
+                true_positive += 1
             else:
-                # false positive condition
-                if unique_label_set[i] == predicted[j]:
-                    false_positive += 1
-                else:
-                    true_negative += 1
+                false_negative += 1
+        # negative true condition
+        else:
+            # false positive condition
+            if 1 == predicted[j]:
+                false_positive += 1
+            else:
+                true_negative += 1
 
-        print(true_negative)
-        print(true_positive)
-        print(false_positive)
-        print(false_negative)
-        print("-------")
+    precision = true_positive / (true_positive + false_positive)
+    recall = true_positive / (true_positive + false_negative)
 
-        precision = true_positive / (true_positive + false_positive)
-        recall = true_positive / (true_positive + false_negative)
-        precision_recall.append([unique_label_set[i], precision, recall])
-
-    return np.asarray(precision_recall)
+    return precision, recall
 
 
 # main method where the program starts
@@ -372,5 +392,10 @@ if __name__ == '__main__':
 
     # get the predictions from the output file to calculate the accuracy
     predictions = np.genfromtxt(pred_output_file).astype(int)
-    print(get_accuracy(test_y, predictions))
-    print(get_precision_recall(test_y, predictions))
+
+    _accuracy = get_accuracy(test_y, predictions)
+    _precision_recall = get_precision_recall(test_y, predictions)
+
+    print("Accuracy is: " + str(_accuracy))
+    print("Precision is: " + str(_precision_recall[0]))
+    print("Recall is: " + str(_precision_recall[1]))
