@@ -4,6 +4,7 @@ Decision Tree implementation in Python, supports GINI Index and Entropy as impur
 Use the python file - trainDT.py for both training and testing.
 
 The file trainDT.py takes the following parameters: <br>
+
       __train_data__ - provide the path of the file, the file should contain the training data   <br>
       __train_label__ - provide the path of the file, the file should contain the training labels  <br>
       __test_data__ - provide the path of the file, the file should contain the testing data <br>
