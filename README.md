@@ -5,14 +5,14 @@ Use the python file - trainDT.py for both training and testing.
 
 The file trainDT.py takes the following parameters: <br>
 
-      train_data - provide the path of the file, the file should contain the training data   <br>
-      train_label - provide the path of the file, the file should contain the training labels  <br>
-      test_data - provide the path of the file, the file should contain the testing data <br>
-      test_label - provide the path of the file, the file should contain the testing labels  <br>
-      nlevels  - maximum number of levels of the decision tree <br>
-      pthrd - threshold of the impurity  <br>
-      impurity - type of the impurity, currently only supports - gini index and entropy. The user should provide only either of two parameters - "gini" or "entropy" <br>
-      pred_file - provide the path of the file where the predictions of the test data will be stored.  <br>
+      train_data - provide the path of the file, the file should contain the training data 
+      train_label - provide the path of the file, the file should contain the training labels 
+      test_data - provide the path of the file, the file should contain the testing data 
+      test_label - provide the path of the file, the file should contain the testing labels  
+      nlevels  - maximum number of levels of the decision tree 
+      pthrd - threshold of the impurity  
+      impurity - type of the impurity, currently only supports - gini index and entropy. The user should provide only either of two parameters - "gini" or "entropy" 
+      pred_file - provide the path of the file where the predictions of the test data will be stored 
 
 Sample command: 
 ~~~
